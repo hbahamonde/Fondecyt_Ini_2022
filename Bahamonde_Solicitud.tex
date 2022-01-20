@@ -1,0 +1,165 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[9pt,stdletter,dateno,sigleft,openany]{newlfm} % Extra options: 'sigleft' for a left-aligned signature, 'stdletternofrom' to remove the from address, 'letterpaper' for US letter paper - consult the newlfm class manual for more options
+
+%\usepackage{charter} % Use the Charter font for the document text
+\usepackage{graphics}
+
+\usepackage{standalone}
+
+%% with this patch, the newlfm should work (BEGIN)
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@zfancyhead}{\fancy@reset}{\f@nch@reset}{}{}
+\patchcmd{\@set@em@up}{\f@ncyolh}{\f@nch@olh}{}{}
+\patchcmd{\@set@em@up}{\f@ncyolh}{\f@nch@olh}{}{}
+\patchcmd{\@set@em@up}{\f@ncyorh}{\f@nch@orh}{}{}
+\makeatother
+%% with this patch, the newlfm should work (END)
+
+
+\newsavebox{\Luiuc}\sbox{\Luiuc}{\parbox[b]{1.75in}{\vspace{0.5in}
+\includegraphics[width=1.2\linewidth]{/Users/hectorbahamonde/research/Fondecyt_Ini_2022/logo.png}}} % Company/institution logo at the top left of the page
+\makeletterhead{Uiuc}{\Lheader{\usebox{\Luiuc}}}
+
+\newlfmP{sigsize=50pt} % Slightly decrease the height of the signature field
+\newlfmP{addrfromphone} % Print a phone number under the sender's address
+\newlfmP{addrfromemail} % Print an email address under the sender's address
+\PhrPhone{\texttt{p}} % Customize the "Telephone" text
+\PhrEmail{\texttt{e}} % Customize the "E-mail" text
+
+\lthUiuc % Print the company/institution logo
+
+% email input begin
+\newread\fid
+\newcommand{\readfile}[1]% #1 = filename
+{\bgroup
+  \endlinechar=-1
+  \openin\fid=#1
+  \read\fid to\filetext
+  \loop\ifx\empty\filetext\relax% skip over comments
+    \read\fid to\filetext
+  \repeat
+  \closein\fid
+  \global\let\filetext=\filetext
+\egroup}
+\readfile{/Users/hectorbahamonde/Bibliografia_PoliSci/email.txt}
+% email input end
+
+\usepackage{color} % for colors
+
+\usepackage{hyperref}
+\hypersetup{
+    %bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=true,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=blue,      % color of file links
+    urlcolor=blue           % color of external links
+}
+
+\hypersetup{
+  colorlinks = true,
+  urlcolor = blue,
+  pdfpagemode = UseNone
+}
+
+
+%%% bib begin
+\usepackage[american]{babel}
+\usepackage{csquotes}
+%\usepackage[style=chicago-authordate,doi=false,isbn=false,url=false,eprint=false]{biblatex}
+
+\usepackage[authordate,isbn=false,doi=false,url=false,eprint=false]{biblatex-chicago}
+\DeclareFieldFormat[article]{title}{\mkbibquote{#1}} % make article titles in quotes
+\DeclareFieldFormat[thesis]{title}{\mkbibemph{#1}} % make theses italics
+
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryCitekey{\clearfield{month}}
+
+\addbibresource{/Users/hectorbahamonde/Bibliografia_PoliSci/library.bib} 
+\addbibresource{/Users/hectorbahamonde/Bibliografia_PoliSci/Bahamonde_BibTex2013.bib} 
+
+% USAGES
+%% use \textcite to cite normal
+%% \parencite to cite in parentheses
+%% \footcite to cite in footnote
+%% the default can be modified in autocite=FOO, footnote, for ex. 
+%%% bib end
+
+%----------------------------------------------------------------------------------------
+%	YOUR NAME AND CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+%\namefrom{\vspace{-3cm}Hector Bahamonde, PhD} % Name
+
+\addrfrom{
+{\vspace{-2cm}}\\ % Date
+[12pt]
+{\bf H\'ector Bahamonde, PhD}\\
+{\color{blue}{\bf Investigador Asociado}}\\
+{\color{blue}Instituto Milenio Fundamento de los Datos}\\
+Santiago, Chile
+}
+
+\phonefrom{+358-40-3621438} % Phone number
+
+\emailfrom{\href{mailto:hibano@utu.fi}{hibano@utu.fi} \\ 
+\texttt{w}: \href{http://www.hectorbahamonde.com}{www.HectorBahamonde.com}\\
+\today}% Link to last version
+
+
+%----------------------------------------------------------------------------------------
+%	ADDRESSEE AND GREETING/CLOSING
+%----------------------------------------------------------------------------------------
+
+%\greetto{\vspace{-1cm}Dear Members of the Search Committee,} % Greeting text
+%\closeline{\vspace{-1cm}\includegraphics[width=3cm]{/Users/hectorbahamonde/Administracion/signature.pdf} \hspace{-4cm}} % Closing text
+
+
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\begin{newlfm}
+
+%----------------------------------------------------------------------------------------
+%	LETTER CONTENT
+%----------------------------------------------------------------------------------------
+
+
+
+\vspace{-2cm}
+Estimada Directora Fondecyt, Alejandra Vidales Carmona (Ps., M.A.),
+
+Me dirijo cordialmente a usted con el motivo de que tenga a bien autorizar la reducci\'on de permanencia anual m\'inima en Chile debido a una pasant\'ia temporal que me encuentro realizando en el extranjero. Aunque el proyecto ser\'a realizado en su \emph{totalidad} en Chile, cumpliendo a cabalidad con \emph{todos} los numerales de las bases del Concurso de Proyectos Fondecyt---pero en especial, los numerales \#1.6 y \#3.3---no podr\'e estar en Chile el m\'inimo de seis meses al a\~no establecido en el numeral \#3.4 de las bases. Acogi\'endome al mismo numeral \#3.4, y por los motivos y justificaciones que explico abajo, quisiera solicitar la reducci\'on de la estad\'ia anual m\'inima en Chile, baj\'andola de seis meses a dos meses por a\~no, durante toda la ejecuci\'on del proyecto Fondecyt Iniciaci\'on 2022 \#11220303. 
+
+La pasant\'ia que me encuentro realizando guarda estricta relaci\'on con mi proyecto de investigaci\'on Fondecyt Iniciaci\'on 2022, y sigue muy de cerca mis objetivos respecto a la formaci\'on de mi agenda de investigaci\'on a mediano y largo plazo. Se trata de una posici\'on temporal de investigador senior en la prestigiosa Universidad de Turku, en Finlandia. La pasant\'ia dura tres a\~nos. El centro donde me encuentro temporalmente afiliado se llama ``INVEST'', cuya especializaci\'on es la desigualdad econ\'omica y el estudio multidisciplinar de la sociedad. Debido a que viajar\'e a Chile a supervisar el trabajo de campo, sostener reuniones de trabajo y dar charlas/seminarios, siempre mantendr\'e contacto estrecho y permanente con Chile mientras hago mi pasant\'ia en Finlandia. 
+
+Quisiera notar que mi solicitud s\'olo apunta a prorrogar mi permanencia material m\'inima en Chile, ya que por mi lado, y de acuerdo a la naturaleza de mi proyecto Fondecyt Iniciaci\'on 2022, yo podr\'e cumplir con \emph{todos} los plazos, productos y fechas comprometidas, as\'i tambi\'en como con \emph{todos} los compromisos administrativos para con ANID. Por ejemplo, el trabajo de campo y recolecci\'on de datos estar\'a a cargo de consultoras y centros de estudios pertinentes a la investigaci\'on social cuantitativa. En cuanto a los an\'alisis y diferentes actividades del proyecto, se podr\'an realizar por mi sin ning\'un problema estando temporalmente fuera del pa\'is. Lo mismo ocurre con varias reuniones de coordinaci\'on que se podr\'an hacer de manera telem\'atica.
+
+De aprobarse esta prorroga, podr\'e utilizar un sinn\'umero de recursos que me ofrecer\'a temporalmente la Universidad de Turku, como por ejemplo laboratorios, equipamiento inexistente en Chile, as\'i tambi\'en como bibliotecas y bases de datos. As\'i mismo, podr\'e participar en seminarios, reuniones de trabajo y conferencias en los que estar\'an los expertos m\'as importantes de mi disciplina. La ventaja no s\'olo consiste en estar temporalmente en Finlandia, sino tambi\'en en el hecho de que al estar en Europa, mi conectividad con el resto de mi comunidad epist\'emica proporcionar\'a una ganancia substantiva que ayudar\'a a completar de mejor manera los objetivos materiales y substantivos de mi proyecto Fondecyt Iniciaci\'on 2022. Para finalizar, la instituci\'on patrocinante de mi proyecto Fondecyt Iniciaci\'on 2022, el \emph{Instituto Milenio Fundamento de los Datos}, est\'a completamente al tanto, y apoya completamente mi plan estrat\'egico de investigaci\'on.
+
+Espero sinceramente que ANID y Fondecyt vea en mi ausencia temporal en Chile una ganancia para con los objetivos de mi proyecto Fondecyt Iniciaci\'on 2022. Si existieran dudas respecto a mi solicitud, por favor, no duden en comunicarse conmigo.
+
+{\vspace{0.5cm}\hspace{10cm}H\'ector Bahamonde, PhD}
+
+%----------------------------------------------------------------------------------------
+
+\end{newlfm}
+\end{document}
