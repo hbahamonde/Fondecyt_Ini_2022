@@ -1,0 +1,163 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[9pt,stdletter,dateno,sigleft,openany]{newlfm} % Extra options: 'sigleft' for a left-aligned signature, 'stdletternofrom' to remove the from address, 'letterpaper' for US letter paper - consult the newlfm class manual for more options
+
+%\usepackage{charter} % Use the Charter font for the document text
+\usepackage{graphics}
+
+\usepackage{standalone}
+
+%% with this patch, the newlfm should work (BEGIN)
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@zfancyhead}{\fancy@reset}{\f@nch@reset}{}{}
+\patchcmd{\@set@em@up}{\f@ncyolh}{\f@nch@olh}{}{}
+\patchcmd{\@set@em@up}{\f@ncyolh}{\f@nch@olh}{}{}
+\patchcmd{\@set@em@up}{\f@ncyorh}{\f@nch@orh}{}{}
+\makeatother
+%% with this patch, the newlfm should work (END)
+
+
+\newsavebox{\Luiuc}\sbox{\Luiuc}{\parbox[b]{1.75in}{\vspace{0.5in}
+\includegraphics[width=1.2\linewidth]{/Users/hectorbahamonde/research/Fondecyt_Ini_2022/logo.png}}} % Company/institution logo at the top left of the page
+\makeletterhead{Uiuc}{\Lheader{\usebox{\Luiuc}}}
+
+\newlfmP{sigsize=50pt} % Slightly decrease the height of the signature field
+\newlfmP{addrfromphone} % Print a phone number under the sender's address
+\newlfmP{addrfromemail} % Print an email address under the sender's address
+\PhrPhone{\texttt{p}} % Customize the "Telephone" text
+\PhrEmail{\texttt{e}} % Customize the "E-mail" text
+
+\lthUiuc % Print the company/institution logo
+
+% email input begin
+\newread\fid
+\newcommand{\readfile}[1]% #1 = filename
+{\bgroup
+  \endlinechar=-1
+  \openin\fid=#1
+  \read\fid to\filetext
+  \loop\ifx\empty\filetext\relax% skip over comments
+    \read\fid to\filetext
+  \repeat
+  \closein\fid
+  \global\let\filetext=\filetext
+\egroup}
+\readfile{/Users/hectorbahamonde/Bibliografia_PoliSci/email.txt}
+% email input end
+
+\usepackage{color} % for colors
+
+\usepackage{hyperref}
+\hypersetup{
+    %bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=true,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=blue,      % color of file links
+    urlcolor=blue           % color of external links
+}
+
+\hypersetup{
+  colorlinks = true,
+  urlcolor = blue,
+  pdfpagemode = UseNone
+}
+
+
+%%% bib begin
+\usepackage[american]{babel}
+\usepackage{csquotes}
+%\usepackage[style=chicago-authordate,doi=false,isbn=false,url=false,eprint=false]{biblatex}
+
+\usepackage[authordate,isbn=false,doi=false,url=false,eprint=false]{biblatex-chicago}
+\DeclareFieldFormat[article]{title}{\mkbibquote{#1}} % make article titles in quotes
+\DeclareFieldFormat[thesis]{title}{\mkbibemph{#1}} % make theses italics
+
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryCitekey{\clearfield{month}}
+
+\addbibresource{/Users/hectorbahamonde/Bibliografia_PoliSci/library.bib} 
+\addbibresource{/Users/hectorbahamonde/Bibliografia_PoliSci/Bahamonde_BibTex2013.bib} 
+
+% USAGES
+%% use \textcite to cite normal
+%% \parencite to cite in parentheses
+%% \footcite to cite in footnote
+%% the default can be modified in autocite=FOO, footnote, for ex. 
+%%% bib end
+
+%----------------------------------------------------------------------------------------
+%	YOUR NAME AND CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+%\namefrom{\vspace{-3cm}Hector Bahamonde, PhD} % Name
+
+\addrfrom{
+{\vspace{-2cm}}\\ % Date
+[12pt]
+{\bf H\'ector Bahamonde, PhD}\\
+{\color{blue}{\bf Investigador Adjunto}}\\
+{\color{blue}Instituto Milenio Fundamento de los Datos}\\
+Santiago, Chile
+}
+
+\phonefrom{+358-40-3621438} % Phone number
+
+\emailfrom{\href{mailto:hibano@utu.fi}{hibano@utu.fi} \\ 
+\texttt{w}: \href{http://www.hectorbahamonde.com}{www.HectorBahamonde.com}\\
+\today}% Link to last version
+
+
+%----------------------------------------------------------------------------------------
+%	ADDRESSEE AND GREETING/CLOSING
+%----------------------------------------------------------------------------------------
+
+%\greetto{\vspace{-1cm}Dear Members of the Search Committee,} % Greeting text
+%\closeline{\vspace{-1cm}\includegraphics[width=3cm]{/Users/hectorbahamonde/Administracion/signature.pdf} \hspace{-4cm}} % Closing text
+
+
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\begin{newlfm}
+
+%----------------------------------------------------------------------------------------
+%	LETTER CONTENT
+%----------------------------------------------------------------------------------------
+
+
+
+\vspace{-2cm}
+Estimada Directora Fondecyt, Alejandra Vidales Carmona (Ps., M.A.),
+
+Me dirijo cordialmente a usted con el motivo de que tenga a bien autorizar el cambio de instituci\'on patrocinante principal de mi proyecto de investigaci\'on Fondecyt Iniciaci\'on 2022 \#11220303. Desde agosto del 2021 me encuentro temporalmente afiliado a una posici\'on de investigador senior en la prestigiosa Universidad de Turku, en Finlandia. La pasant\'ia dura tres a\~nos. Debido a las razones que explico abajo, aprovechar los recursos asociados a mi pasant\'ia necesariamente me habr\'ia inhabilitado para poder ejercer mis funciones como profesor asistente en la Universidad de O'Higgins, en Chile. Por lo tanto, y teniendo como prioridad el desarrollo de mi agenda de investigaci\'on al mediano y largo plazo, decid\'i desvincularme voluntariamente a la Universidad de O'Higgins, y buscar otra instituci\'on que me diera la flexibilidad de poder temporalmente residir parte del a\~no fuera de Chile. 
+
+
+El centro en Finlandia donde me encuentro temporalmente afiliado se llama ``INVEST''. Su especializaci\'on es la desigualdad econ\'omica y el estudio multidisciplinar de la sociedad. Sin bien con la Universidad de O'Higgins siempre hemos tenido (y seguimos teniendo) una relaci\'on muy estrecha de colaboraci\'on, la estancia en la Universidad de Turku me dar\'a acceso a un sinn\'umero de recursos como por ejemplo laboratorios, equipamiento, bibliotecas y bases de datos inexistente en Chile. La ventaja no s\'olo consiste en estar temporalmente en Finlandia, sino tambi\'en en el hecho de que al estar en Europa, mi conectividad con el resto de mi comunidad epist\'emica proporcionar\'a una ganancia substantiva que ayudar\'a a completar de mejor manera los objetivos materiales y substantivos de mi proyecto Fondecyt Iniciaci\'on 2022. Importantemente, mi nueva instituci\'on patrocinante, el \emph{Instituto Milenio Fundamento de los Datos}, est\'a completamente al tanto, y apoya completamente mi plan estrat\'egico de investigaci\'on. De hecho, ellos est\'an a gusto d\'andome la flexibilidad de realizar estas actividades en el extranjero. Obviamente, esta flexibilidad no era compatible con mi cargo de profesor asistente en la Universidad de O'Higgins. 
+
+
+Espero sinceramente que ANID y Fondecyt vean en mi solicitud de cambio de instituci\'on patrocinante principal de mi proyecto de investigaci\'on Fondecyt Iniciaci\'on 2022 \#11220303 una acci\'on coherente con el objetivo de completar el desarrollo del proyecto de investigaci\'on Fondecyt Iniciaci\'on 2022, y la consolidaci\'on de mi agenda de investigaci\'on al mediano y largo plazo. Si existieran dudas respecto a mi solicitud, por favor, no duden en comunicarse conmigo.
+
+{\vspace{0.5cm}\hspace{10cm}H\'ector Bahamonde, PhD}
+
+%----------------------------------------------------------------------------------------
+
+\end{newlfm}
+\end{document}
